@@ -1,0 +1,17 @@
+<%= form_for @user do |f| %>
+  <div class='control-group'>
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name %>
+  </div>
+  <div class='control-group'>
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div class='control-group'>
+    <%= f.label :Department %>
+    <%= f.collection_select :department_id, Department.all, :id, :department_name, prompt: true %>
+  </div>
+
+  <%= f.submit 'Submit',class:'btn btn-success'  %>
+<% end %>
