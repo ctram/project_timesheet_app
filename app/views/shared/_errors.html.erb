@@ -1,7 +1,14 @@
-<% if !obj.errors.empty? %>
-  <div class='well'>
-    <% obj.errors.full_messages do |msg| %>
-      <%= msg %>
+<% if obj.errors.any? %>
+  <% count = obj.errors.count %>
+  <div class='alert alert-danger'>
+    Please fix the following <%=pluralize(count, 'error') %>:
+    <br><br>
+    <ul>
+    <% obj.errors.full_messages.each do |msg| %>
+      <li>
+        <%= msg %>
+      </li>
     <% end %>
+    </ul>
   </div>
 <% end %>
