@@ -1,0 +1,7 @@
+<% if !obj.errors.empty? %>
+  <div class='well'>
+    <% obj.errors.full_messages do |msg| %>
+      <%= msg %>
+    <% end %>
+  </div>
+<% end %>

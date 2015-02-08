@@ -1,4 +1,6 @@
 <h4>Login</h4>
+<%= render '/shared/errors', obj: @user %>
+
 <div class='well well-sm'>
   <%= form_for @user do |f| %>
     <div class='control-group'>

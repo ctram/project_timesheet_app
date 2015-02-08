@@ -10,7 +10,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    binding.pry
 
     if @user.save
       flash[:notice] = "You've successfully created a new account."
