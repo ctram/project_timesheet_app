@@ -1,0 +1,47 @@
+The user is: <%= @user.username %>
+
+<br><BR>
+
+The month id is: <%= @month.id %>
+<br><BR>
+
+The year is: <%= @month.year %>
+<br><BR>
+The month is: <%= @month.name %>
+<br><BR>
+
+<h3><%= "Month is: #{@month.name} #{@month.year}" %></h3>
+<table>
+  <!-- headers -->
+  <tr>
+    <th>
+      Date
+    </th>
+    <th>
+      Project Code
+    </th>
+    <th>
+      Percentge
+    </th>
+
+
+
+
+  </tr>
+    <% @month.days.each do |day| %>
+      <% day.allocations.each do |allocation| %>
+  <tr>
+    <td>
+      <%= link_to 'Edit', edit_user_month_day_allocation_path(@user.id,@month.id, day.id, allocation.id) %>
+    </td>
+    <td>
+      <%= allocation.project_code  %>
+    </td>
+      <br>
+    <td>
+      <%= allocation.percentage %>
+    </td>
+  </tr>
+      <% end %>
+    <% end %>
+</table>

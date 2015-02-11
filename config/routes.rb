@@ -1,8 +1,22 @@
 Rails.application.routes.draw do
+  root to: 'sessions#new'
 
+  resources :users do
+    resources :months do
+      resources :days do
+        resources :allocations
+      end
+    end
+  end
 
-  resources :users
   resources :sessions
+
+  get 'logout', to: 'sessions#destroy', as: 'logout'
+  get 'login', to: 'sessions#new', as: 'login'
+
+  get 'about', to: 'static_pages#about', as: 'about'
+  get 'contact_us', to: 'static_pages#contact_us', as: 'contact_us'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

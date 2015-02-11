@@ -2,6 +2,10 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
+    if @user.id != session[:user_id]
+      flash[:notice] = "You must be logged in as that user to access that page."
+      redirect_to user_path(session[:user_id])
+    end
   end
 
   def new
@@ -9,18 +13,23 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
-      flash[:notice] = "You've successfully created a new account."
-      redirect_to user_path(@user.id)
-    else
+    if params[:password] != params[:password_confirmation]
+      flash[:error] = "Your password do not match."
       render :new
+    else
+      user = User.new(user_params)
+      if user.save
+        flash[:notice] = "You've successfully registered!"
+        redirect_to user_path(user)
+      else
+        render :new
+      end
     end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:first_name,:last_name,:department_id, :username, :password)
+    params.require(:user).permit(:first_name,:last_name,:department_id, :username, :password, :password_confirmation)
   end
 end

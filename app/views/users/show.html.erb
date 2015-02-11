@@ -1,3 +1,21 @@
+<%= render 'shared/flashes' %>
+
 <div>
-<h4 class='page-header'><%= @user.first_name %></h4>
+  <h4 class='page-header'>
+    Welcome <%= @user.first_name %>!
+  </h4>
 </div>
+
+
+Months Available
+
+<% if @user.months.any? %>
+  <ul class='well'>
+    <% @user.months.each do |month| %>
+        <li>
+          <%= link_to "#{month.year.to_s} #{month.name}", user_month_path(@user,month) %>
+        </li>
+        <br>
+    <% end %>
+  </ul>
+<% end %>

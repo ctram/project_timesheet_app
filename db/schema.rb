@@ -11,11 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150208030458) do
+ActiveRecord::Schema.define(version: 20150211081339) do
+
+  create_table "allocations", force: true do |t|
+    t.string   "project_code"
+    t.integer  "percentage"
+    t.integer  "day_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "days", force: true do |t|
+    t.string   "name"
+    t.integer  "month_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "departments", force: true do |t|
     t.string   "name"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "months", force: true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "year"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
