@@ -10,6 +10,11 @@ The year is: <%= @month.year %>
 The month is: <%= @month.name %>
 <br><BR>
 
+
+<%= link_to 'Add new Day', new_user_month_day_path %>
+
+
+
 <h3><%= "Month is: #{@month.name} #{@month.year}" %></h3>
 <table>
   <!-- headers -->
