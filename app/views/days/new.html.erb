@@ -1,10 +1,15 @@
-Create a new day for
-<%= @user.username   %>
+<%= render '/shared/errors', obj: @day %>
 
-<%= form_for @day do |f| %>
-  <%= f.label :project_code %>
-  <%= f.text_field :project_code %>
-  <%= f.label :percentage %>
-  <%= f.intger :percentage %>
-  <%= f.submit 'submit', class:'btn btn-success' %>
+
+<b style='font-size:200%'><%= @user.username %></b>
+<br>
+Create a new day for the month of
+<%= @month.name %> <%= @month.year %>
+
+<br><br>
+<%= form_for @day, url: user_month_days_path do |f| %>
+  <%= f.label :Date %>
+  <br>
+  <%= f.text_field :name %>
+  <%= f.submit 'Submit', class:'btn btn-success' %>
 <% end %>
