@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     user = User.find_by(username: params[:username])
 
     if !user or !user.authenticate(params[:password])
-    binding.pry
+    
       flash[:error] = "Something is wrong with your username or password."
       render :new
     else

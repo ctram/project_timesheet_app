@@ -17,10 +17,11 @@ class UsersController < ApplicationController
       flash[:error] = "Your password do not match."
       render :new
     else
-      user = User.new(user_params)
-      if user.save
+      @user = User.new(user_params)
+      if @user.save
         flash[:notice] = "You've successfully registered!"
-        redirect_to user_path(user)
+        session[:user_id] = @user.id
+        redirect_to user_path(@user)
       else
         render :new
       end

@@ -6,7 +6,7 @@ class MonthsController < ApplicationController
       flash[:notice] = "You must be logged in as that user to view that data."
       redirect_to user_path
     end
-    # binding.pry
+    # 
   end
 
 
