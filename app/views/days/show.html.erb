@@ -1,9 +1,7 @@
 <%= render 'shared/flashes' %>
-<%  %>
-
 
 <h3>
-
+  Show page
   <b>Day</b>
   <br>
   <br>
@@ -21,10 +19,14 @@
     </th>
   </tr>
 
+
+
+
+
   <tr>
     <% @day.allocations.each do |a| %>
       <td class='center-align'>
-        <%= a.project_code %>
+      <%= a.project_code %>
       </td>
     <% end %>
 
@@ -33,9 +35,9 @@
 
   <tr>
     <% @day.allocations.each do |a| %>
-      <td>
-        <%= a.percentage %>%
-      </td>
+    <td>
+      <%= a.percentage %>%
+    </td>
     <% end %>
 
     <td> <%= @day.allocations.reduce(0) {|m,a| m + a.percentage} %>%
@@ -43,13 +45,11 @@
   </tr>
 
   <tr>
-  <% @day.allocations.each do |a| %>
-    <td>
-      <%= link_to 'Edit', edit_user_month_day_allocation_path(@user, @month, @day, a) %>
-      |
-      <%= link_to 'Delete', user_month_day_allocation_path(@user, @month, @day, a), method: 'delete' %>
+    <% @day.allocations.each do |a| %>
+    <td class='center-align'>
+      <%= link_to 'Edit', edit_user_month_day_allocation_path(@user, @month, @day, a.id) %>
     </td>
-  <% end %>
+    <% end %>
 
   </tr>
 

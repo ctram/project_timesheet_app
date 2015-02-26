@@ -18,6 +18,13 @@ class AllocationsController < ApplicationController
 
   def create
     @allocation = Allocation.new params_allocation
+    if session[:allocations] == nil
+      allocations = [@allocation]
+      session[:allocations] = allocations
+    else
+      session[:allocations] << @allocation
+    end
+
     if @allocation.save
       @day.allocations << @allocation
       @day.save
@@ -27,6 +34,14 @@ class AllocationsController < ApplicationController
       flash[:error] = "An error occured -- the allocation was not saved."
       render :new
     end
+  end
+
+  def destroy
+    Allocation.delete params[:id]
+    flash[:notice] = "Allocation deleted."
+    flash.keep
+    
+    redirect_to edit_user_month_day_path(@user, @month, @day)
   end
 
   private

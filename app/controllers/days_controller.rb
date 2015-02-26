@@ -2,13 +2,13 @@ class DaysController < ApplicationController
   before_action :load_user_and_month
 
   def edit
-
+    flash.keep
+    
   end
 
-  # Omit #show action for now, instead use #edit
-  # def show
-  # end
-  
+  def show
+  end
+
   private
 
   def day_params

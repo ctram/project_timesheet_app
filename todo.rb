@@ -1,0 +1,1 @@
+# TODO: the day show page should have a link to save the day -- until a user saves the day, modifications and additions to allocations should be held in MEMORY - in other words, when an allocation is added, it should not be said until the User clicks save on the Day page.

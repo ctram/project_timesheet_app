@@ -61,11 +61,12 @@ class MonthsController < ApplicationController
     @month = Month.new(name:month_name, year:year, user_id: @user.id)
 
     if @month.save
-      flash[:notice] = "You have added a month"
+      flash[:notice] = "You have added a month."
     @month.populate_days month_number.to_i
+      
       redirect_to user_path(@user)
     else
-      flash[:error] = "Something wrong occured"
+      flash[:error] = "Something wrong occured."
       render :new
     end
   end

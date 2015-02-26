@@ -11,26 +11,16 @@ The month is: <%= @month.name %>
 <br><BR>
 
 
-<%= link_to 'Add new Day', new_user_month_day_path(@user,@month) %>
-
-
-
 <h3><%= "Month is: #{@month.name} #{@month.year}" %></h3>
 <div class='control-group'>
   <table>
-    <!-- headers -->
     <tr>
       <td>
       </td>
       <td>
       </td>
-      <%  %>
-      <th colspan="<%= @month.most_number_of_allocations %>" border="1px solid black">
+      <th colspan="<%= @month.num_uniq_project_codes + 1 %>" border="1px solid black">
         Project Codes
-      </td>
-      <td>
-      </td>
-      <td>
       </td>
     </tr>
     <tr>
@@ -40,24 +30,55 @@ The month is: <%= @month.name %>
       <th>
         Date
       </th>
+      <!-- # @month.project_codes - provide unique list of month's allocations. -->
+      <% @month.project_codes.each do |project_code| %>
+        <th>
+          <%= project_code %>
+        </th>
+      <% end %>
       <th>
-        Project Code
+        Total
       </th>
     </tr>
 
     <% @month.days.each do |day| %>
       <tr>
         <td>
-          <%= link_to 'Edit', edit_user_month_day_path(@user,@month,day) %>
+
+        <%= link_to 'Show', user_month_day_path(@user,@month,day) %>
+        |
+        <%= link_to 'Edit', edit_user_month_day_path(@user,@month,day) %>
         </td>
         <td>
           <%= day.number %>
         </td>
+        <% @month.project_codes.each do |project_code| %>
+          <% days_project_codes = day.allocations.map do |a| %>
+            <% a.project_code %>
+          <% end %>
+
+        <td>
+        <% if days_project_codes.include? project_code %>
+          <% day.allocations.each do |a| %>
+            <% if a.project_code == project_code %>
+              <%= a.percentage %>%
+            <% end %>
+          <% end %>
+        <% else %>
+          <%= 0 %>%
+        <% end %>
+        </td>
+        <% end %>
+
+        <td>
+          <%= day.sum_percentages %>%
+        </td>
+
+
+
       </tr>
     <% end %>
   </table>
 </div>
 
-<h2>
-  Test
-</h2>
+<hr>

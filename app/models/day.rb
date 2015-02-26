@@ -7,4 +7,11 @@ class Day < ActiveRecord::Base
   def num_allocations
     self.allocations.count
   end
+
+  def sum_percentages
+    self.allocations.reduce(0) do |m,a|
+      m + a.percentage
+    end
+  end
+
 end

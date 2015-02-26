@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'sessions#new'
+  root to: 'users#index'
 
   resources :users do
     resources :months do

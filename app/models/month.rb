@@ -34,4 +34,19 @@ class Month < ActiveRecord::Base
     max_num_allocations
   end
 
+  def num_uniq_project_codes
+    project_codes.count
+  end
+
+
+  def project_codes
+    # returns array of uniqe project codes
+    project_codes = []
+    self.days.each do |day|
+      day.allocations.each do |a|
+        project_codes << a.project_code
+      end
+    end
+    project_codes.uniq
+  end
 end
