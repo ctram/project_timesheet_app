@@ -1,3 +1,4 @@
+
 class MonthsController < ApplicationController
   def show
     @user = current_user
@@ -25,10 +26,12 @@ class MonthsController < ApplicationController
   end
 
   def create
-    
+  # TODO: When month is created, it should automatically hold all days (objects) within the month.
+
     @user = User.find(params[:user_id])
     year = params[:month]["name(1i)"].to_i
-    month_name = case params[:month]['name(2i)']
+    month_number = params[:month]['name(2i)'] #String
+    month_name = case month_number
       when '1'
         'January'
       when '2'
@@ -56,10 +59,10 @@ class MonthsController < ApplicationController
     end
 
     @month = Month.new(name:month_name, year:year, user_id: @user.id)
-    # Need to save the @month
 
     if @month.save
       flash[:notice] = "You have added a month"
+    @month.populate_days month_number.to_i
       redirect_to user_path(@user)
     else
       flash[:error] = "Something wrong occured"

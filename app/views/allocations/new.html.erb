@@ -1,0 +1,21 @@
+<h3>
+  <%= @user.username %>
+  <br>
+  <%= @month.year %> <%= @month.name %> <%= add_suffix_to_number @day.number %>
+
+</h3>
+Add an Allocation
+
+<%= form_for [@user,@month,@day,@allocation] do |f|%>
+  <div class='control-group'>
+    <%= f.label :project_code %>
+    <%= f.text_field :project_code %>
+  </div>
+  <div class='control-group'>
+    <%= f.label :percentage %>
+    <%= f.number_field :percentage, {min:'1', max:'100'} %>
+  </div>
+  <div class='control-group'>
+    <%= f.submit %>
+  </div>
+<% end %>

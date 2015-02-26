@@ -16,68 +16,48 @@ The month is: <%= @month.name %>
 
 
 <h3><%= "Month is: #{@month.name} #{@month.year}" %></h3>
-<table>
-  <!-- headers -->
-  <tr>
-    <td>
-    </td>
-    <td>
-    </td>
-    <th colspan="2" border="1px solid black">
-      Project Codes
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-  </tr>
-  <tr>
-    <th>
-
-    </th>
-    <th>
-      Date
-    </th>
-    <th>
-      Project Code
-    </th>
-    <th>
-      Percentage
-    </th>
-  </tr>
-
-  <% @month.days.each do |day| %>
+<div class='control-group'>
+  <table>
+    <!-- headers -->
     <tr>
       <td>
-        <%= link_to 'Edit', edit_user_month_day_path(@user,@month,day) %>
       </td>
       <td>
-        <%= day.name %>
+      </td>
+      <%  %>
+      <th colspan="<%= @month.most_number_of_allocations %>" border="1px solid black">
+        Project Codes
+      </td>
+      <td>
+      </td>
+      <td>
       </td>
     </tr>
-  <% end %>
-</table>
+    <tr>
+      <th>
+
+      </th>
+      <th>
+        Date
+      </th>
+      <th>
+        Project Code
+      </th>
+    </tr>
+
+    <% @month.days.each do |day| %>
+      <tr>
+        <td>
+          <%= link_to 'Edit', edit_user_month_day_path(@user,@month,day) %>
+        </td>
+        <td>
+          <%= day.number %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
 
 <h2>
   Test
 </h2>
-
-
-<table>
-  <tr>
-    <th colspan="2">
-      something  asdsd
-    </th>
-  </tr>
-
-
-  <tr>
-    <th>
-      1
-    </th>
-    <th>
-      2
-    </th>
-  </tr>
-
-</table>

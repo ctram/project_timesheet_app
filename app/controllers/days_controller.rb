@@ -1,26 +1,14 @@
 class DaysController < ApplicationController
   before_action :load_user_and_month
 
-  def new
-    # 
-    @user = User.find(params[:user_id])
-    @month = Month.find(params[:month_id])
-    @day = Day.new
+  def edit
+
   end
 
-  def create
-    @day = Day.new(day_params)
-    @day.month_id = @month.id
-
-    if @day.save
-      flash[:notice] = "New day created."
-      redirect_to user_month_path(@user, @month)
-    else
-      render :new
-    end
-  end
-
-
+  # Omit #show action for now, instead use #edit
+  # def show
+  # end
+  
   private
 
   def day_params
@@ -30,6 +18,7 @@ class DaysController < ApplicationController
   def load_user_and_month
     @user = User.find(params[:user_id])
     @month = Month.find(params[:month_id])
+    @day = Day.find(params[:id])
   end
 
 

@@ -1,0 +1,44 @@
+<h3>
+
+  <b>Day</b>
+  <br>
+  <br>
+  User: <%= @user.username %>
+  <br>
+  <%= @month.year %> <%= @month.name %> <%= add_suffix_to_number @day.number %>
+</h3>
+
+<%= link_to 'Add allocation', new_user_month_day_allocation_path(@user, @month, @day) %>
+<br>
+<table>
+  <tr>
+    <th colspan='<%= @day.allocations.count + 1 %>'>
+      Allocations
+    </th>
+  </tr>
+
+  <tr>
+    <% @day.allocations.each do |a| %>
+      <td class='center-align'>
+        <%= a.project_code %>
+      </td>
+    <% end %>
+
+    <td> Total </td>
+  </tr>
+
+  <tr>
+    <% @day.allocations.each do |a| %>
+      <td>
+        <%= a.percentage %>%
+      </td>
+    <% end %>
+
+    <td> <%= @day.allocations.reduce(0) {|m,a| m + a.percentage} %>%
+    </td>
+  </tr>
+
+
+  <%  %>
+
+</table>
