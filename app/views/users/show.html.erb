@@ -18,6 +18,11 @@
     <% @user.months.each do |month| %>
         <li>
           <%= link_to "#{month.year.to_s} #{month.name}", user_month_path(@user.id, month.id) %>
+
+        <%= " | " %>
+
+        <%= link_to 'Delete', user_month_path(@user, month), {method:'delete'} %>
+
         </li>
         <br>
     <% end %>

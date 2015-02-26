@@ -5,3 +5,13 @@
 </div>
 
 <!-- TODO: Add form for entering a month. -->
+
+
+<%= form_for [@user, @month] do |f| %>
+
+
+  <%= f.date_select :name, {discard_day: true}%>
+
+
+  <%= f.submit %>
+<% end %>
