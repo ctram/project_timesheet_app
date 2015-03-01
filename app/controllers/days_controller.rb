@@ -2,8 +2,11 @@ class DaysController < ApplicationController
   before_action :load_user_and_month
 
   def edit
-    flash.keep
-    
+    # TODO: code days#edit view template to show an editable table of allocations
+    # If day does not have alloactions, redirect to the day#new action
+    # load a @allocations_array
+    @allocations = @day.allocations
+
   end
 
   def show

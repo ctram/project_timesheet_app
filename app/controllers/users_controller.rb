@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.id != session[:user_id]
       flash[:notice] = "You must be logged in as that user to access that page."
-      redirect_to user_path(session[:user_id])
+      redirect_to users_path
     end
   end
 

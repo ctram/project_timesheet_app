@@ -2,6 +2,7 @@
 <%  %>
 
 
+<h3>Edit Day </h
 <h3>
 
   <b>Day</b>
@@ -14,43 +15,53 @@
 
 <%= link_to 'Add allocation', new_user_month_day_allocation_path(@user, @month, @day) %>
 <br>
-<table>
-  <tr>
-    <th colspan='<%= @day.allocations.count + 1 %>'>
-      Allocations
-    </th>
-  </tr>
 
-  <tr>
-    <% @day.allocations.each do |a| %>
-      <td class='center-align'>
-        <%= a.project_code %>
-      </td>
-    <% end %>
+  <!-- TODO: use form_tag to create dynamic table of project codes and percentages -->
 
-    <td> Total </td>
-  </tr>
 
-  <tr>
-    <% @day.allocations.each do |a| %>
+
+  <table>
+      <tr>
+        <th colspan='<%= @day.allocations.count + 1 %>'>
+          Allocations
+        </th>
+      </tr>
+
+    <form action='<%= user_month_day_path(@user,@month,@day) %>' %>
+      <tr>
+        <% i = 0 %> <!-- To keep track of itertaion in next each loop -->
+        <% @allocations.each do |a| %>
+          <td>
+            <%= text_field_tag("project_code_#{i}", value="#{a.project_code}") %>
+            <% i += 1 %>
+          </td>
+
+        <% end %>
+
+        <td>
+          Total
+        </td>
+      </tr>
+
+    <!-- TODO: Use a For loop to generate form fields for every single project code -->
+    <tr>
+        <% @allocations.each do |a| %>
+          <td>
+            <%= number_field_tag("#{a.project_code}", value="#{a.percentage}") %>
+          </td>
+
+        <% end %>
+
       <td>
-        <%= a.percentage %>%
+        <%= @allocations.reduce(0){|m,a| m + a.percentage} %>
       </td>
-    <% end %>
 
-    <td> <%= @day.allocations.reduce(0) {|m,a| m + a.percentage} %>%
-    </td>
-  </tr>
 
-  <tr>
-  <% @day.allocations.each do |a| %>
-    <td>
-      <%= link_to 'Edit', edit_user_month_day_allocation_path(@user, @month, @day, a) %>
-      |
-      <%= link_to 'Delete', user_month_day_allocation_path(@user, @month, @day, a), method: 'delete' %>
-    </td>
-  <% end %>
 
-  </tr>
 
-</table>
+    </tr>
+
+  </table>
+
+        <%= submit_tag %> <!-- So submit button appears outside of table -->
+      </form>

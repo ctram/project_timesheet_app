@@ -11,6 +11,9 @@
 </h3>
 
 <%= link_to 'Add allocation', new_user_month_day_allocation_path(@user, @month, @day) %>
+|
+<%= link_to 'Edit allocations', edit_user_month_day_path(@user, @month, @day) %>
+<br>
 <br>
 <table>
   <tr>
@@ -18,11 +21,6 @@
       Allocations
     </th>
   </tr>
-
-
-
-
-
   <tr>
     <% @day.allocations.each do |a| %>
       <td class='center-align'>
@@ -43,7 +41,7 @@
     <td> <%= @day.allocations.reduce(0) {|m,a| m + a.percentage} %>%
     </td>
   </tr>
-
+<!--
   <tr>
     <% @day.allocations.each do |a| %>
     <td class='center-align'>
@@ -51,6 +49,6 @@
     </td>
     <% end %>
 
-  </tr>
+  </tr> -->
 
 </table>
