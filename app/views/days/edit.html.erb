@@ -27,7 +27,7 @@
         </th>
       </tr>
 
-    <form action='<%= user_month_day_path(@user,@month,@day) %>' %>
+    <form action='<%= user_month_day_path(@user,@month,@day)%>' method='PATCH' %>
       <tr>
         <% i = 0 %> <!-- To keep track of itertaion in next each loop -->
         <% @allocations.each do |a| %>
