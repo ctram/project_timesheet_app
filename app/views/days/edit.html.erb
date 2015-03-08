@@ -1,9 +1,6 @@
 <%= render 'shared/flashes' %>
-<%  %>
 
-
-<h3>Edit Day </h
-<h3>
+<h3>Edit Day </h3>
 
   <b>Day</b>
   <br>
@@ -11,54 +8,73 @@
   User: <%= @user.username %>
   <br>
   <%= @month.year %> <%= @month.name %> <%= add_suffix_to_number @day.number %>
-</h3>
 
 <%= link_to 'Add allocation', new_user_month_day_allocation_path(@user, @month, @day) %>
 <br>
 
-  <!-- TODO: use form_tag to create dynamic table of project codes and percentages -->
   <table>
       <tr>
-        <th colspan='<%= @day.allocations.count + 1 %>'>
+        <th colspan='11'>
           Allocations
         </th>
       </tr>
+<!-- TODO: days#edit view has 10 sets of fields for entering project codes and percentages, instead of entering the project code and percentage pair one at a time.
+       -->
+<%= form_tag user_month_day_path(@user,@month,@day), {method:'PATCH'} do %>
 
-    <%= form_tag user_month_day_path(@user,@month,@day), {method:'PATCH'} %>
-      <tr>
-        <% i = 0 %> <!-- To keep track of itertaion in next each loop -->
-        <% @allocations.each do |a| %>
-          <td>
-            <%= text_field_tag("project_code_#{i}_name", value="#{a.project_code}") %>
-            <% i += 1 %>
-          </td>
+  <tr>
 
-        <% end %>
-
-        <td>
-          Total
-        </td>
-      </tr>
-
-    <!-- TODO: Use a For loop to generate form fields for every single project code -->
-    <tr>
-      <% i = 0 %> <!-- To keep track of itertaion in next each loop -->
-      <% @allocations.each do |a| %>
-          <td>
-            <%= number_field_tag("project_code_#{i}_perc", value="#{a.percentage}") %>
-            <% i += 1 %>
-          </td>
-
-        <% end %>
-
+<!--  -->
+  <% if @allocations.count > 0 %>
+    <% i = 0 %> <!-- To keep track of itertaion in next each loop -->
+    <% @allocations.each do |a| %>
       <td>
-        <%= @allocations.reduce(0){|m,a| m + a.percentage} %>
+      <%= text_field_tag("project_code_#{i}_name", value="#{a.project_code}") %>
+      <% i += 1 %>
       </td>
-    </tr>
+    <% end %>
+  <% end %>
+
+  <!-- Empty fields -->
+  <% empty_fields = 10 - @allocations.count %>
+  <% if empty_fields != 0  %>
+    <!-- Generate empty pairs of fields for project codes and percentages -->
+    <% empty_fields.times do |i| %>
+      <td>
+      <%= text_field_tag "project_code_#{@allocations.count + i}_name" %>
+      </td>
+    <% end %>
+  <% end %>
+  <!-- Total ################################### -->
+  <td>
+  Total
+  </td>
+  </tr>
+
+  <tr>
+  <% i = 0 %> <!-- To keep track of itertaion in next each loop -->
+  <% @allocations.each do |a| %>
+    <td>
+    <%= number_field_tag("project_code_#{i}_perc", value="#{a.percentage}") %>
+    <% i += 1 %>
+    </td>
+  <% end %>
+
+  <% if empty_fields != 0  %>
+    <!-- Generate empty pairs of fields for project codes and percentages -->
+    <% empty_fields.times do |i| %>
+      <td>
+      <%= number_field_tag "project_code_#{@allocations.count + i}_perc" %>
+      </td>
+    <% end %>
+  <% end %>
+
+  <!-- Summation of percentages -->
+  <td>
+  <%= @allocations.reduce(0){|m,a| m + a.percentage} %>
+  </td>
+  </tr>
 
   </table>
-        <%= submit_tag %> <!-- So submit button appears outside of table -->
-      </form>
-
-
-<hr>
+  <%= submit_tag %> <!-- So submit button appears outside of table -->
+<% end %>
