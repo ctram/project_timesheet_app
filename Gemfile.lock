@@ -178,7 +178,7 @@ DEPENDENCIES
   pry
   rails (= 4.2.0.rc2)
   rails_12factor
-  sass-rails
+  sass-rails (~> 4.0)
   sdoc (~> 0.4.0)
   spring
   sprockets (= 2.11.0)
