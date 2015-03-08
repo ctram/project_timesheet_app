@@ -6,7 +6,6 @@ class Month < ActiveRecord::Base
   validates :user_id, presence: true
   validates :year, presence: true
 
-  # TODO: a month should populate an array of day objects
   def populate_days month_number
     # Determine how many Day objects to create.
     if [1,3,5,7,8,10,12].include? month_number
@@ -38,7 +37,6 @@ class Month < ActiveRecord::Base
     project_codes.count
   end
 
-
   def project_codes
     # returns array of uniqe project codes
     project_codes = []
@@ -49,4 +47,5 @@ class Month < ActiveRecord::Base
     end
     project_codes.uniq
   end
+  # TODO: Month view totals averaged percentages for each project code - code this in the month.rb
 end
