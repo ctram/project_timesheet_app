@@ -1,4 +1,6 @@
-Live demo of current build: https://polar-oasis-4427.herokuapp.com/
+Live demo of current build: https://sleepy-tor-5560.herokuapp.com
+
+Application that keeps track of user's time spent working on different projects. 
 
 == README
 
