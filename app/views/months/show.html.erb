@@ -6,10 +6,6 @@ The month id is: <%= @month.id %>
 <br><BR>
 
 The year is: <%= @month.year %>
-<br><BR>
-The month is: <%= @month.name %>
-<br><BR>
-
 
 <h3><%= "Month is: #{@month.name} #{@month.year}" %></h3>
 <div class='control-group'>
@@ -53,18 +49,12 @@ The month is: <%= @month.name %>
           <%= day.number %>
         </td>
 
-
-
-
-
-        <% @month.project_codes.each do |project_code| %>
           <% days_project_codes = day.allocations.map do |a| %>
             <% a.project_code %>
           <% end %>
 
           <% @month.unique_project_codes.each do |project_code| %>
             <td>
-              <%  %>
             <% if days_project_codes.include? project_code %>
               <% day.allocations.each do |a| %>
                 <% if a.project_code == project_code %>
@@ -77,30 +67,9 @@ The month is: <%= @month.name %>
             </td>
           <% end %>
 
-
-
-
-
-
-
-
-          <!-- <td>
-          <% if days_project_codes.include? project_code %>
-            <% day.allocations.each do |a| %>
-              <% if a.project_code == project_code %>
-                <%= a.percentage %>%
-              <% end %>
-            <% end %>
-          <% else %>
-            <%= 0 %>%
-          <% end %>
-          </td>
-        <% end %> -->
-
         <td>
           <%= day.sum_percentages %>%
         </td>
-
       </tr>
     <% end %>
   </table>

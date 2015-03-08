@@ -22,9 +22,8 @@
 
   <tr>
 
-<!--  -->
   <% if @allocations.count > 0 %>
-    <% i = 0 %> <!-- To keep track of itertaion in next each loop -->
+    <% i = 0 %> <!-- To keep track of iteration in loop -->
     <% @allocations.each do |a| %>
       <td>
       <%= text_field_tag("project_code_#{i}_name", value="#{a.project_code}") %>
