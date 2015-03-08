@@ -17,9 +17,6 @@
 <br>
 
   <!-- TODO: use form_tag to create dynamic table of project codes and percentages -->
-
-
-
   <table>
       <tr>
         <th colspan='<%= @day.allocations.count + 1 %>'>
@@ -27,12 +24,12 @@
         </th>
       </tr>
 
-    <form action='<%= user_month_day_path(@user,@month,@day)%>' method='PATCH' %>
+    <%= form_tag user_month_day_path(@user,@month,@day), {method:'PATCH'} %>
       <tr>
         <% i = 0 %> <!-- To keep track of itertaion in next each loop -->
         <% @allocations.each do |a| %>
           <td>
-            <%= text_field_tag("project_code_#{i}", value="#{a.project_code}") %>
+            <%= text_field_tag("project_code_#{i}_name", value="#{a.project_code}") %>
             <% i += 1 %>
           </td>
 
@@ -45,9 +42,11 @@
 
     <!-- TODO: Use a For loop to generate form fields for every single project code -->
     <tr>
-        <% @allocations.each do |a| %>
+      <% i = 0 %> <!-- To keep track of itertaion in next each loop -->
+      <% @allocations.each do |a| %>
           <td>
-            <%= number_field_tag("#{a.project_code}", value="#{a.percentage}") %>
+            <%= number_field_tag("project_code_#{i}_perc", value="#{a.percentage}") %>
+            <% i += 1 %>
           </td>
 
         <% end %>
@@ -55,13 +54,11 @@
       <td>
         <%= @allocations.reduce(0){|m,a| m + a.percentage} %>
       </td>
-
-
-
-
     </tr>
 
   </table>
-
         <%= submit_tag %> <!-- So submit button appears outside of table -->
       </form>
+
+
+<hr>
