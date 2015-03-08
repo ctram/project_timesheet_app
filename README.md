@@ -1,8 +1,10 @@
 Live demo of current build: https://sleepy-tor-5560.herokuapp.com
 
-Application that keeps track of user's time spent working on different projects. 
+Application that keeps track of user's time spent working on different projects.
 
-== README
+
+
+///////// Update later //////
 
 This README would normally document whatever steps are necessary to get the
 application up and running.

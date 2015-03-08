@@ -22,6 +22,19 @@ class Month < ActiveRecord::Base
     end
   end
 
+  # Return a sorted array of strings; the Month's unique project codes
+  def unique_project_codes
+    project_codes = []
+    days = self.days
+    days.each do |d|
+      d.allocations.each do |a|
+        project_codes << a.project_code.upcase
+      end
+    end  # project_codes is array of all project_code strings within the month.
+    uniq_project_codes = project_codes.uniq
+    uniq_project_codes.sort
+  end
+
   def most_number_of_allocations
     days = self.days
     max_num_allocations = 0

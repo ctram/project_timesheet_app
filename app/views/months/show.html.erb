@@ -31,7 +31,7 @@ The month is: <%= @month.name %>
         Date
       </th>
       <!-- # @month.project_codes - provide unique list of month's allocations. -->
-      <% @month.project_codes.each do |project_code| %>
+      <% @month.unique_project_codes.each do |project_code| %>
         <th>
           <%= project_code %>
         </th>
@@ -52,29 +52,54 @@ The month is: <%= @month.name %>
         <td>
           <%= day.number %>
         </td>
+
+
+
+
+
         <% @month.project_codes.each do |project_code| %>
           <% days_project_codes = day.allocations.map do |a| %>
             <% a.project_code %>
           <% end %>
 
-        <td>
-        <% if days_project_codes.include? project_code %>
-          <% day.allocations.each do |a| %>
-            <% if a.project_code == project_code %>
-              <%= a.percentage %>%
+          <% @month.unique_project_codes.each do |project_code| %>
+            <td>
+              <%  %>
+            <% if days_project_codes.include? project_code %>
+              <% day.allocations.each do |a| %>
+                <% if a.project_code == project_code %>
+                  <%= a.percentage %>%
+                <% end %>
+              <% end %>
+            <% else %>
+              0%
             <% end %>
+            </td>
           <% end %>
-        <% else %>
-          <%= 0 %>%
-        <% end %>
-        </td>
-        <% end %>
+
+
+
+
+
+
+
+
+          <!-- <td>
+          <% if days_project_codes.include? project_code %>
+            <% day.allocations.each do |a| %>
+              <% if a.project_code == project_code %>
+                <%= a.percentage %>%
+              <% end %>
+            <% end %>
+          <% else %>
+            <%= 0 %>%
+          <% end %>
+          </td>
+        <% end %> -->
 
         <td>
           <%= day.sum_percentages %>%
         </td>
-
-
 
       </tr>
     <% end %>
