@@ -11,16 +11,24 @@
 
 <%= link_to 'Add allocation', new_user_month_day_allocation_path(@user, @month, @day) %>
 <br>
+<br>
+
+<div class='container'>
+  <div class='row'>
+    <div class='span1 well'>
+      Directions: In the first row, enter the project you worked on. On the second row, enter the percentage of your time you spent working on the project.
+    </div>
+  </div>
+</div>
 
   <table>
-      <tr>
-        <th colspan='11'>
-          Allocations
-        </th>
-      </tr>
+    <tr>
+      <th colspan='13'> Allocations </th>
+    </tr>
 <%= form_tag user_month_day_path(@user,@month,@day), {method:'PATCH'} do %>
 
   <tr>
+    <td> Project Code </td>
 
   <% if @allocations.count > 0 %>
     <% i = 0 %> <!-- To keep track of iteration in loop -->
@@ -49,6 +57,8 @@
   </tr>
 
   <tr>
+    <td> Percentage </td>
+
   <% i = 0 %> <!-- To keep track of itertaion in next each loop -->
   <% @allocations.each do |a| %>
     <td>
