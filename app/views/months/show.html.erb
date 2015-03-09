@@ -37,6 +37,7 @@ The year is: <%= @month.year %>
       </th>
     </tr>
 
+    <!-- Generate rows of Days ###############  -->
     <% @month.days.each do |day| %>
       <tr>
         <td>
@@ -72,6 +73,19 @@ The year is: <%= @month.year %>
         </td>
       </tr>
     <% end %>
+
+    <!-- Generate final row which presents averaged percentage per project code -->
+    <tr>
+      <td></td>
+      <td></td>
+      <% @month.unique_project_codes.each do |project_code| %>
+        <td> <%= @month.project_code_percentage_average(project_code).round %>% </td>
+      <% end %>
+
+      <td> <%= @month.sum_project_code_percentage_averages.round %>% </td>
+    </tr>
+
+
   </table>
 </div>
 

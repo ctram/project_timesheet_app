@@ -22,6 +22,36 @@ class Month < ActiveRecord::Base
     end
   end
 
+  # Return number of days with non-zero allocations
+  def num_days_w_allocations
+    self.days.select{|d| d.allocations != []}.count
+  end
+
+  # Return the averaged percentage worked on project code for the month.
+  def project_code_percentage_average project_code
+    if unique_project_codes.include? project_code
+      sum = 0
+      self.days.each do |d|
+        if d.allocations != []
+          d.allocations.each do |a|
+            sum += a.percentage if a.project_code == project_code
+          end
+        end
+      end
+      sum.to_f / num_days_w_allocations
+    else
+      0
+    end
+  end
+
+  def sum_project_code_percentage_averages
+    sum = 0
+    unique_project_codes.each do |project_code|
+      sum += project_code_percentage_average(project_code)
+    end
+    sum
+  end
+
   # Return a sorted array of strings; the Month's unique project codes
   def unique_project_codes
     project_codes = []
@@ -60,5 +90,4 @@ class Month < ActiveRecord::Base
     end
     project_codes.uniq
   end
-  # TODO: Month view totals averaged percentages for each project code - code this in the month.rb
 end
