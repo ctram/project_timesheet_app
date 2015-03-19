@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   get 'about', to: 'static_pages#about', as: 'about'
   get 'contact_us', to: 'static_pages#contact_us', as: 'contact_us'
+  get 'test', to: 'test_pages#test', as: 'test'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
